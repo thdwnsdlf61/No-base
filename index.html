@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Climate+Crisis&display=swap');
+
+        /* * {
+            font-family: "Climate Crisis", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            font-variation-settings:
+                "YEAR" 2020;
+        } */
+
+        .mypw {
+            color: white;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            font-size: 200px;
+            /* 크기를 줄여보세요 */
+            font-family: "Playfair Display", serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            /* 폰트 패밀리 수정 */
+            padding-left: 50px;
+            font-weight: bold;
+            background-color: black;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .mybottom {
+            background-color: rgb(22, 11, 46);
+            /* 배경색을 검은색으로 설정 */
+            color: white;
+
+            height: 200px;
+
+            /* 내용물을 정렬 */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding-left: 50px;
+            /* 왼쪽 여백 */
+            font-weight: bold;
+
+            bottom: 0;
+            /* 하단에 배치 */
+            left: 0;
+            /* 왼쪽에 배치 */
+            right: 0;
+            /* 오른쪽으로 꽉 차게 */
+
+
+            background-color: black;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .mypw>button {
+            width: 150px;
+            height: 50px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+
+            border: 1px solid white;
+            margin-top: 20px;
+        }
+
+        /* 입력 박스 스타일 */
+        .mypostingbox {
+            flex: 1;
+            /* mypostingbox가 남은 공간을 차지하도록 설정 */
+            max-width: 300px;
+            /* 크기 제한 */
+            /* 고정된 너비 설정 */
+            padding: 20px;
+            /* 내부 여백 */
+            border: 1px solid #ccc;
+            /* 테두리 */
+            border-radius: 5px;
+            /* 모서리 둥글게 */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            /* 그림자 */
+            border-radius: 10px;
+            border: 2px solid black;
+        }
+
+        /* 카드 스타일 */
+        .mycards {
+            flex: 2;
+            /* mycards가 더 많은 공간을 차지하도록 설정 */
+            width: 100%;
+            /* 남은 공간을 모두 차지하도록 설정 */
+            max-height: 400px;
+            /* 고정된 높이 설정 */
+            overflow-y: auto;
+            /* 세로 스크롤 가능 */
+            padding: 10px;
+            /* 내부 여백 */
+            border: 1px solid #ccc;
+            /* 테두리 */
+            border-radius: 5px;
+            /* 모서리 둥글게 */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            /* 그림자 */
+        }
+
+        /* 카드의 이미지 크기 조정 */
+        .card-img-top {
+            height: 200px;
+            /* 카드 이미지 높이 고정 */
+            object-fit: cover;
+            /* 비율 유지하며 자르기 */
+        }
+
+        .mainmypostingbox {
+            width: auto;
+            margin: 20px auto;
+            padding: 20px 20px 20px 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px black;
+        }
+
+        .semimypostingbox {
+            color: white;
+
+            height: 49.3%;
+
+            /* 내용물을 정렬 */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+            /* 공백 간격 조정 */
+            font-weight: bold;
+            font-size: 25px;
+
+            width: 45%;
+            /* 너비 조정 */
+            margin: 40px 30px 100px 30px;
+            /* 위, 오른쪽, 아래, 왼쪽 여백 */
+            padding: 20px;
+            /* 패딩 설정 */
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px black;
+
+            background-color: black;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .semimessagebox {
+            color: white;
+
+            height: 49.3%;
+
+            /* 내용물을 정렬 */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+            /* 공백 간격 조정 */
+            font-weight: bold;
+            font-size: 25px;
+            text-align: center;
+
+            width: 99%;
+            margin: 20px;
+            /* 너비 조정 */
+            padding: 20px;
+            /* 패딩 설정 */
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px black;
+
+            background-color: black;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .mybtn {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: 10px;
+        }
+
+        .mytab {
+
+            font-weight: bold;
+            /* 글자 굵게 */
+            color: black;
+            /* 글자 색을 검은색으로 설정 */
+            font-size: 16px;
+            /* 글자 크기 설정 */
+        }
+
+        .pacename {
+            display: flex;
+            justify-content: space-around;
+            /* Or any alignment you prefer */
+            margin: 20px 0;
+            /* Adjust the spacing around the names */
+        }
+
+        .pacename img {
+            width: 150px;
+            /* Set desired width */
+            height: 150px;
+            /* Maintain aspect ratio */
+            border-radius: 10px;
+            /* Optional: adds rounded corners to names */
+            transition: transform 0.2s;
+            /* Adds a hover effect */
+        }
+
+        .pacename img:hover {
+            transform: scale(1.5);
+            /* Scale up on hover */
+        }
+
+        .fade-in {
+            opacity: 0;
+            /* 초기 투명도 설정 */
+            transition: opacity 1s ease-in;
+            /* 부드러운 전환 */
+        }
+
+        .mybtn>button {
+            margin-right: 10px;
+        }
+
+        /* post-entry의 전체 레이아웃 설정 */
+        .post-entry {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            width: 100vw;
+        }
+
+        /* 이름, PW를 수평으로 배치 */
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* 이름 */
+        .post-name {
+            color: #333;
+        }
+
+        /* PW */
+        .post-pw {
+            color: #555;
+        }
+
+        .post-date {
+            font-size: 1.2rem;
+            /* 또는 원하는 크기로 조정 */
+        }
+
+        /* 내용 */
+        .post-content p {
+            font-size: 1rem;
+            color: #333;
+            margin: 0;
+        }
+
+        .post-divider {
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+            /* 원하는 색상 */
+            margin: 10px 0;
+            /* 상하 여백 */
+            background-color: #808080;
+            /* 회색 색상 */
+        }
+
+        /* 날짜 */
+        .post-footer {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
+    <script type="module">
+        // Firebase SDK 라이브러리 가져오기
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyCBuUAkXKAl5c34qrQQ28lNjKu4WPqdz6A",
+            authDomain: "test-2a0d4.firebaseapp.com",
+            projectId: "test-2a0d4",
+            storageBucket: "test-2a0d4.firebasestorage.app",
+            messagingSenderId: "481000273932",
+            appId: "1:481000273932:web:55aab15f3a157934799629",
+            measurementId: "G-DHQ744VQ07"
+        };
+
+        // Firebase 인스턴스 초기화
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        //데이터베이스에서 이미지 데이터 가져오기
+        const teamdata_load = await getDocs(collection(db, "teamdata"));
+
+
+        teamdata_load.forEach((doc) => {
+            if (doc.data().id != 0) {
+
+                let inner_html = `<a href="per_introduce/intro_${doc.data().id}.html">
+    <img src="${doc.data().image}" alt="Team Member ${doc.data().id}" style="width: 100px; height: auto;">
+</a>`
+                $(".pacename").append(inner_html);
+            }
+        })
+
+
+
+        $("#postingbtn").click(async function () {
+            let name = $('#name').val();
+            let pw = $('#pw').val();
+            let content = $('#content').val();
+            let date = new Date().toISOString();
+
+            // Firestore에서 비밀번호 가져오기
+            let passwordDoc = await getDocs(collection(db, "password"));
+
+            // 비밀번호가 포함된 첫 번째 문서 가져오기
+            let storedPw = '';
+            passwordDoc.forEach(doc => {
+                storedPw = doc.data().password; // 비밀번호 가져오기
+            });
+            console.log('Stored Password:', storedPw);
+            // 비밀번호가 '1'인지 확인
+            if (pw === storedPw) {
+                let doc = {
+                    'name': name,
+                    'pw': pw,
+                    'content': content,
+                    'date': date
+                };
+
+                await addDoc(collection(db, "postmessage"), doc);
+                alert('저장완료!');
+                window.location.reload();
+            } else {
+                alert('비밀번호를 확인해 주세요');
+            }
+        })
+
+        let docs = await getDocs(collection(db, "postmessage"));
+        docs.forEach((doc) => {
+            let row = doc.data();
+
+            let name = row['name'];
+            let pw = row['pw'];
+            let content = row['content'];
+            let date = row['date'];
+
+            let temp_html = `
+        <div class="post-entry">
+            <div class="post-header">
+                <span class="post-name">${name}</span>
+                <p>${date}</p>
+            </div>
+            <hr class="post-divider"> 
+            <div class="post-footer">
+                <small class="post-date"">${content}</small>
+            </div>
+        </div>`;
+            $('#message').append(temp_html);
+        });
+
+    </script>
+</head>
+
+<body>
+    <div class="mypw">
+        <p style="font-size: 200px; font-family: 'Climate Crisis', sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;">No Base</p>
+    </div>
+
+    <div>
+        <button onclick="location.href='sub_fuc/introduce.html'" class="mytab">
+            Introduce
+        </button>
+        <button onclick="location.href='sub_fuc/guestbook.html'" class="mytab">
+            GuestBook
+        </button>
+        <button onclick="location.href='sub_fuc/member_settings.html'" class="mytab">
+            Member Settings
+        </button>
+        <button onclick="location.href='sub_fuc/team_train.html'" class="mytab">
+            Train Record
+        </button>
+    </div>
+
+    <div class="mainmypostingbox" id="postingbox">
+        <h1 style="font-size: 40px; font-family: 'Climate Crisis', sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;">Team Goal</h1>
+        <p style="margin: 5px 0;">1. javascript, http, css를 이용한 기본적인 웹페이지 개설 능력 강화</p>
+        <p style="margin: 5px 0;">2. Firebase를 통한 Api의 사용 이해</p>
+        <p style="margin: 5px 0;">3. 팀활동을 통한 팀워크 개발</p>
+    </div>
+
+    <div class="pacename">
+    </div>
+
+    <div>
+        <div class="semimypostingbox" id="postingbox" style="display: inline-block;">
+            <h1 style="font-size: 40px; font-family: 'Climate Crisis', sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;">Team Rules</h1>
+            <p style="margin: 10px 0;">1. 시간 약속을 철저히 지키겠습니다.</p>
+            <p style="margin: 10px 0;">2. 소통을 중요시하며 자리 비움이나 문제가 생기면 빠르게 공유하겠습니다.</p>
+            <p style="margin: 10px 0;">3. 실수나 문제가 있어도 남 탓하지말고 문제를 해결해나가는데 집중하겠습니다.</p>
+            <p style="margin: 10px 0;">4. 대화를 할 때는 캠도 켜고 화면공유도 잘 하겠습니다. </p>
+            <p style="margin: 10px 0;">5. 파이팅하겠습니다!</p>
+        </div>
+        <div class="semimypostingbox" id="postingbox" style="display: inline-block;">
+            <h1 style="font-size: 40px; font-family: 'Climate Crisis', sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;">Our Goal</h1>
+            <p style="margin: 10px 0;">1. 매일 일정 소화하기</p>
+            <p style="margin: 10px 0;">2. 부끄러워도 물어보기</p>
+            <p style="margin: 10px 0;">3. 이번 프로젝트 포트폴리오로 사용하기</p>
+            <p style="margin: 10px 0;">4. TIL 남은날까지 맨날 쓰기 </p>
+            <p style="margin: 10px 0;">5. 1일 1TIL, 1알고리즘</p>
+        </div>
+
+        <div class="semimessagebox" style="display: block; font-size: 40px; font-family: 'Climate Crisis', sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;">Community</div>
+        <div style="border: 2px solid black; padding:1%; border-radius: 20px; gap: 30px; display: flex; ">
+            <div class="mypostingbox" id="postingbox">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="name" placeholder="name@example.com"
+                        style="border-radius: 50px; color: white; background-color: black;">
+                    <label for="floatingInput" style="color: #8b8b8b;">닉네임</label>
+                </div>
+                <div class="form-floating mb-3" id="postingbox">
+                    <input type="email" class="form-control" id="pw" placeholder="name@example.com"
+                        style="border-radius: 50px; color: white; background-color: black;">
+                    <label for="floatingInput" style="color: #8b8b8b;">PW</label>
+                </div>
+                <div class="form-floating" id="postingbox">
+                    <input type="email" class="form-control" id="content" placeholder="name@example.com"
+                        style="border-radius: 50px; color: white; background-color: black;">
+                    <label for="floatingTextarea" style="color: #8b8b8b;">내용</label>
+                </div>
+                <div class="mybtn">
+                    <button id="postingbtn" type="button" class="btn btn-dark"
+                        style="background-color: black; color: white; border: 2px solid white; padding: 10px 20px; border-radius: 5px;">기록하기</button>
+                </div>
+            </div>
+            <div class="mycards">
+                <div id="message" class="row row-cols-1 row-cols-md-4 g-4">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+    </div>
+</body>
+
+
+
+
+
+
+</html>
